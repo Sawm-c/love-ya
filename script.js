@@ -305,14 +305,36 @@ noButton.addEventListener("mouseover", () => {
     return Math.random() < 0.5 ? -displacement : displacement;
   };
 
-noButton.addEventListener("touchstart", () => {
-  const minDisplacement = 100; // Minimum move distance
-  const maxDisplacement = 500; // Maximum move distance
 
-  const getRandomDisplacement = (min, max) => {
-    let displacement = Math.random() * (max - min) + min;
-    return Math.random() < 0.5 ? -displacement : displacement;
-  };
+
+  
+let tapCount = 0;
+let tapTimer = null;
+
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // tránh việc click ảo trên mobile
+
+  tapCount++;
+  clearTimeout(tapTimer);
+
+  tapTimer = setTimeout(() => {
+    if (tapCount === 1) {
+      // 👉 Một lần chạm: chỉ di chuyển No button
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    } else if (tapCount >= 2) {
+      // 👉 Hai hoặc ba lần chạm nhanh: chuyển sang Valentine Sad
+      valentineCongrats.style.display = "none";
+      valentineSad.style.display = "flex";
+      gsap.fromTo(".valentine-sad", { opacity: 0 }, { opacity: 1, duration: 0.8 });
+    }
+    tapCount = 0;
+  }, 300); // khoảng cách tối đa giữa các lần chạm (ms)
+});
+
 
 
   
