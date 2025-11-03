@@ -311,7 +311,7 @@ noButton.addEventListener("mouseover", () => {
 let tapCount = 0;
 let tapTimer = null;
 
-noBtn.addEventListener("touchstart", (e) => {
+noButton.addEventListener("touchstart", (e) => {
   e.preventDefault(); // tránh việc click ảo trên mobile
 
   tapCount++;
