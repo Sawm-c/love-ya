@@ -306,35 +306,13 @@ noButton.addEventListener("mouseover", () => {
   };
 
 noButton.addEventListener("touchstart", () => {
-  const minDisplacement = 100;
-  const maxDisplacement = 500;
+  const minDisplacement = 100; // Minimum move distance
+  const maxDisplacement = 500; // Maximum move distance
 
-  const getRandomDisplacement = (min, max) => {
-    let displacement = Math.random() * (max - min) + min;
-    return Math.random() < 0.5 ? -displacement : displacement;
-  };
-
-  const buttonRect = noButton.getBoundingClientRect();
-  const viewportWidth = window.innerWidth - buttonRect.width;
-  const viewportHeight = window.innerHeight - buttonRect.height;
-
-  let x = getRandomDisplacement(minDisplacement, maxDisplacement);
-  let y = getRandomDisplacement(minDisplacement, maxDisplacement);
-
-  if (buttonRect.left + x < 0) x = Math.abs(x);
-  if (buttonRect.right + x > viewportWidth) x = -Math.abs(x);
-  if (buttonRect.top + y < 0) y = Math.abs(y);
-  if (buttonRect.bottom + y > viewportHeight) y = -Math.abs(y);
-
-  gsap.to(noButton, {
-    x: `+=${x}`,
-    y: `+=${y}`,
-    duration: 0.1,
-    delay: 0.2,
-    ease: "power2.out"
-  });
-});
-
+  const getRandomDisplacement = (min, max) => {
+    let displacement = Math.random() * (max - min) + min;
+    return Math.random() < 0.5 ? -displacement : displacement;
+  };
 
 
   
